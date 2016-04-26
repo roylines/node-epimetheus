@@ -4,7 +4,7 @@
   "description": "node middleware to automatically instrument node applications for consumption by prometheus",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --reporter mocha-circleci-reporter"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
     "node": ">=4.0.0"
   },
   "devDependencies": {
-    "mocha": "*"
+    "mocha": "*",
+    "mocha-circleci-reporter": "0.0.1"
   }
 }
