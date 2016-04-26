@@ -1,0 +1,28 @@
+{
+  "name": "epimetheus",
+  "version": "0.0.1",
+  "description": "node middleware to automatically instrument node applications for consumption by prometheus",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roylines/node-epimetheus.git"
+  },
+  "keywords": [
+    "prometheus",
+    "metrics",
+    "express",
+    "restify"
+  ],
+  "author": "Roy Lines",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/roylines/node-epimetheus/issues"
+  },
+  "homepage": "https://github.com/roylines/node-epimetheus#readme",
+  "devDependencies": {
+    "mocha": "^2.4.5"
+  }
+}
