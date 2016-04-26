@@ -22,7 +22,10 @@
     "url": "https://github.com/roylines/node-epimetheus/issues"
   },
   "homepage": "https://github.com/roylines/node-epimetheus#readme",
+  "engines": {
+    "node": ">=4.0.0"
+  },
   "devDependencies": {
-    "mocha": "^2.4.5"
+    "mocha": "*"
   }
 }
