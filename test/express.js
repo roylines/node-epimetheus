@@ -3,7 +3,7 @@ const epithemeus = require('../index');
 const request = require('request');
 const should = require('chai').should();
 
-describe('epimetheus', () => {
+describe('express', () => {
   before((done) => {
     const app = express();
     epithemeus.instrument(app);
@@ -25,7 +25,7 @@ describe('epimetheus', () => {
   });
   
   it('should return 200 for /metrics', (done) => {
-    request('http://localhost:3000/metrics/', (e, r, b) => {
+    request('http://localhost:3000/metrics', (e, r, b) => {
       console.log('BODY', b);
       r.statusCode.should.equal(200); 
       return done(e);
