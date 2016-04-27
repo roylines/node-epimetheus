@@ -26,7 +26,13 @@
     "node": ">=4.0.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "express": "^4.13.4",
     "mocha": "*",
-    "mocha-circleci-reporter": "0.0.1"
+    "mocha-circleci-reporter": "0.0.1",
+    "request": "^2.72.0"
+  },
+  "dependencies": {
+    "prom-client": "^3.4.1"
   }
 }
