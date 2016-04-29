@@ -1,15 +1,16 @@
-const express = require('express');
+const restify = require('restify');
 const epithemeus = require('../index');
 const assertExpectations = require('./assert-expectations');
 
-describe('express', () => {
+describe('restify', () => {
   before((done) => {
-    const app = express();
-    epithemeus.instrument(app);
-    app.get('/', (req, res) => {
+    this.server = restify.createServer();
+    epithemeus.instrument(this.server);
+    this.server.get('/', (req, res, done) => {
       res.send();
+      done();
     });
-    this.server = app.listen(3000, done);
+    this.server.listen(3000, done);
   });
 
   after((done) => {
