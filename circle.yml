@@ -2,6 +2,10 @@ machine:
   node:
     version: 4.0
 
+test:
+  override:
+    - npm run coverage
+
 deployment:
   production:
     branch: master
