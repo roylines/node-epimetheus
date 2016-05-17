@@ -45,11 +45,11 @@ const app = express();
 epithemeus.instrument(app);
     
 app.get('/', (req, res) => {
-	res.send();
+  res.send();
 });
 
 app.listen(3000, () => {
-	console.log('express server listening on port 3000');
+  console.log('express server listening on port 3000');
 });
 
 ```
@@ -61,21 +61,21 @@ const epithemeus = require('epimetheus');
 const server = new Hapi.Server();
 
 server.connection({
-	port: 3000
+  port: 3000
 });
     
 epithemeus.instrument(this.server);
     
 server.route({
-	method: 'GET',
-	path: '/',
-	handler: (req, resp) => {
-		resp();
-	}
+  method: 'GET',
+  path: '/',
+  handler: (req, resp) => {
+    resp();
+  }
 });
    
 server.start(() => {
-	console.log('hapi server listening on port 3000');
+  console.log('hapi server listening on port 3000');
 });
 ```
 # <a name="restify"></a> Restify
@@ -88,12 +88,12 @@ const server = restify.createServer();
 epithemeus.instrument(this.server);
 
 server.get('/', (req, res, done) => {
-	res.send();
- 	done();
+  res.send();
+  done();
 });
 
 server.listen(3000, () => {
-	console.log('restify server listening on port 3000');
+  console.log('restify server listening on port 3000');
 });
 
 ```
