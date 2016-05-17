@@ -1,6 +1,9 @@
 # Epimetheus [![Circle CI](https://circleci.com/gh/roylines/node-epimetheus.svg?style=svg)](https://circleci.com/gh/roylines/node-epimetheus)
 
-Middleware to automatically instrument node applications for consumption by a [Prometheus](https://prometheus.io/) server. Prometheus is an open source monitoring solution. Epimetheus can instrument websites and webservices that use [Express](#express), [Hapi](#hapi) or [Restify](#restify).
+Middleware to automatically instrument node applications for consumption by a [Prometheus](https://prometheus.io/) server. 
+Prometheus is an open source monitoring solution. 
+
+Epimetheus can instrument websites and webservices that use [http](#http), [Express](#express), [Hapi](#hapi) or [Restify](#restify).
 
 <!--
 # Instrumentation
@@ -12,8 +15,27 @@ Once your webserver or webservice has been instrumented by Epimetheus, the follo
 > npm install --save epimetheus
 ```
 
-See examples below for examples of use with [Express](#express), [Hapi](#hapi) and [Restify](#restify).
+See examples below for examples of use with [http](#http), [Express](#express), [Hapi](#hapi) and [Restify](#restify).
 
+# <a name="http"></a> http
+```
+const http = require('http');
+const epithemeus = require('../../index');
+
+const server = http.createServer((req, res) => {
+  if(req.url !== '/metrics') {
+    res.statusCode = 200;
+    res.end();
+  }
+});
+
+epithemeus.instrument(server);
+
+server.listen(8003, '127.0.0.1', () => {
+  console.log('http listening on 8003'); 
+});
+
+```
 # <a name="express"></a> Express
 ```
 const express = require('express');
@@ -26,7 +48,7 @@ app.get('/', (req, res) => {
 	res.send();
 });
 
-this.server = app.listen(3000, () => {
+app.listen(3000, () => {
 	console.log('express server listening on port 3000');
 });
 
