@@ -3,6 +3,8 @@
 [![Coverage Status](https://coveralls.io/repos/github/roylines/node-epimetheus/badge.svg?branch=master)](https://coveralls.io/github/roylines/node-epimetheus?branch=master)
 ![Dependencies](https://david-dm.org/roylines/node-epimetheus.svg)
 
+[![NPM](https://nodei.co/npm/epimetheus.png)](https://nodei.co/npm/epimetheus/)
+
 Middleware to automatically instrument node applications for consumption by a [Prometheus](https://prometheus.io/) server. 
 
 Prometheus is an open source monitoring solution that obtains metrics from servers by querying against the /metrics endpoint upon them. 
