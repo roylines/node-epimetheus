@@ -1,7 +1,6 @@
 # Epimetheus 
-[![Circle CI](https://circleci.com/gh/roylines/node-epimetheus.svg?style=svg)](https://circleci.com/gh/roylines/node-epimetheus)
-[![Coverage Status](https://coveralls.io/repos/github/roylines/node-epimetheus/badge.svg?branch=master)](https://coveralls.io/github/roylines/node-epimetheus?branch=master)
-![Dependencies](https://david-dm.org/roylines/node-epimetheus.svg)
+[![CircleCI](https://img.shields.io/circleci/project/roylines/node-epimetheus.svg?maxAge=2592000)]() [![Coveralls](https://img.shields.io/coveralls/roylines/node-epimetheus.svg?maxAge=2592000)]()
+[![David](https://img.shields.io/david/roylines/node-epimetheus.svg?maxAge=2592000)]()
 
 [![NPM](https://nodei.co/npm/epimetheus.png)](https://nodei.co/npm/epimetheus/)
 
