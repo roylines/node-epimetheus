@@ -1,4 +1,6 @@
-# Epimetheus [![Circle CI](https://circleci.com/gh/roylines/node-epimetheus.svg?style=svg)](https://circleci.com/gh/roylines/node-epimetheus)
+# Epimetheus 
+[![Circle CI](https://circleci.com/gh/roylines/node-epimetheus.svg?style=svg)](https://circleci.com/gh/roylines/node-epimetheus)
+[![Coverage Status](https://coveralls.io/repos/github/roylines/node-epimetheus/badge.svg?branch=master)](https://coveralls.io/github/roylines/node-epimetheus?branch=master)
 
 Middleware to automatically instrument node applications for consumption by a [Prometheus](https://prometheus.io/) server. 
 
