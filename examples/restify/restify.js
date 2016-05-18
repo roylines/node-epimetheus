@@ -1,5 +1,5 @@
 const restify = require('restify');
-const epithemeus = require('../../index.js');
+const epithemeus = require('epimetheus');
 
 const server = restify.createServer();
 epithemeus.instrument(server);

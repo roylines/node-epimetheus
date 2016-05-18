@@ -1,5 +1,5 @@
 const express = require('express');
-const epithemeus = require('../../index.js');
+const epithemeus = require('epimetheus');
 
 const app = express();
 epithemeus.instrument(app);
