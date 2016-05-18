@@ -4,9 +4,8 @@
   "description": "node middleware to automatically instrument node applications for consumption by prometheus",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter mocha-circleci-reporter",
-    "coverage": "istanbul cover _mocha -- -R spec",
-    "check-coverage": "istanbul check-coverage"
+    "test": "istanbul cover _mocha -dir $CIRCLE_ARTIFACTS",
+    "coveralls": "cat $CIRCLE_ARTIFACTS/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
@@ -29,11 +28,11 @@
   },
   "devDependencies": {
     "chai": "*",
+    "coveralls": "*",
     "express": "*",
     "hapi": "*",
     "istanbul": "*",
     "mocha": "*",
-    "mocha-circleci-reporter": "*",
     "request": "*",
     "restify": "*"
   },
