@@ -34,7 +34,8 @@
     "istanbul": "*",
     "mocha": "*",
     "request": "*",
-    "restify": "*"
+    "restify": "*",
+    "sinon": "*"
   },
   "dependencies": {
     "prom-client": "3.4.1"
