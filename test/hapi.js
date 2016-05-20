@@ -16,6 +16,13 @@ describe('hapi', () => {
         resp();
       }
     });
+    this.server.route({
+      method: 'GET',
+      path: '/resource/101',
+      handler: (req, resp) => {
+        resp();
+      }
+    });
     this.server.start(done);
   });
 

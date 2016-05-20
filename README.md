@@ -27,7 +27,8 @@ In each case, the following [labels](https://prometheus.io/docs/practices/naming
 
 - **status**: the http status code of the response, e.g. 200, 500
 - **method**: the http method of the request, e.g. put, post.
-- **path**: the path of the request, e.g. /users.
+- **path**: the path of the request. Note that /users/freddie is labelled /users/ so as not to flood prometheus with labels
+- **cardinality**: the cardinality of the request, e.g. /users/freddie has cardinality 'one', /users/ has cardinality 'many'
 
 ## <a name="lag"></a>Event Loop Lag Metrics
 The node event loop lag can be an [strong indication](https://strongloop.com/strongblog/node-js-performance-event-loop-monitoring/) of performance issues caused by node event loop blocking. The following metric can be used to monitor event loop lag:
