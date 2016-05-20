@@ -51,7 +51,7 @@ See examples below for examples of use with [http](#http), [express](#express), 
 # <a name="http"></a> http
 ```
 const http = require('http');
-const epithemeus = require('../../index');
+const epimetheus = require('../../index');
 
 const server = http.createServer((req, res) => {
   if(req.url !== '/metrics') {
@@ -60,7 +60,7 @@ const server = http.createServer((req, res) => {
   }
 });
 
-epithemeus.instrument(server);
+epimetheus.instrument(server);
 
 server.listen(8003, '127.0.0.1', () => {
   console.log('http listening on 8003'); 
@@ -70,10 +70,10 @@ server.listen(8003, '127.0.0.1', () => {
 # <a name="express"></a> Express
 ```
 const express = require('express');
-const epithemeus = require('epimetheus');
+const epimetheus = require('epimetheus');
 
 const app = express();
-epithemeus.instrument(app);
+epimetheus.instrument(app);
     
 app.get('/', (req, res) => {
   res.send();
@@ -87,7 +87,7 @@ app.listen(3000, () => {
 # <a name="hapi"></a> Hapi
 ```
 const Hapi = require('hapi');
-const epithemeus = require('epimetheus');
+const epimetheus = require('epimetheus');
 
 const server = new Hapi.Server();
 
@@ -95,7 +95,7 @@ server.connection({
   port: 3000
 });
     
-epithemeus.instrument(this.server);
+epimetheus.instrument(this.server);
     
 server.route({
   method: 'GET',
@@ -112,11 +112,11 @@ server.start(() => {
 # <a name="restify"></a> Restify
 ```
 const restify = require('restify');
-const epithemeus = require('epimetheus');
+const epimetheus = require('epimetheus');
 
 const server = restify.createServer();
 
-epithemeus.instrument(this.server);
+epimetheus.instrument(this.server);
 
 server.get('/', (req, res, done) => {
   res.send();
