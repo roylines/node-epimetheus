@@ -9,6 +9,9 @@ describe('express', () => {
     app.get('/', (req, res) => {
       res.send();
     });
+    app.get('/resource/:id', (req, res) => {
+      res.send();
+    });
     this.server = app.listen(3000, done);
   });
 

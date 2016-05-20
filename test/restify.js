@@ -10,6 +10,10 @@ describe('restify', () => {
       res.send();
       done();
     });
+    this.server.get('/resource/:id', (req, res, done) => {
+      res.send();
+      done();
+    });
     this.server.listen(3000, done);
   });
 
