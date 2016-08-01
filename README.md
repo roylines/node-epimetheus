@@ -19,26 +19,33 @@ In each case, the following [labels](https://prometheus.io/docs/practices/naming
 
 - **status**: the http status code of the response, e.g. 200, 500
 - **method**: the http method of the request, e.g. put, post.
-- **path**: the path of the request. Note that /users/freddie is labelled /users/ so as not to flood prometheus with labels
-- **cardinality**: the cardinality of the request, e.g. /users/freddie has cardinality 'one', /users/ has cardinality 'many'
+- **handler**: the handler of the request.
 
 ## <a name="lag"></a>Event Loop Lag Metrics
 The node event loop lag can be an [strong indication](https://strongloop.com/strongblog/node-js-performance-event-loop-monitoring/) of performance issues caused by node event loop blocking. The following metric can be used to monitor event loop lag:
 
-- **node\_lag\_duration\_milliseconds**: a [Gauge](https://prometheus.io/docs/concepts/metric_types/#gauge) measuring the event loop lag in milliseconds. This is the difference in milliseconds between a specified duration in a call to setTimeout and the actual duration experienced.
+- **nodejs\_lag\_duration\_milliseconds**: a [Gauge](https://prometheus.io/docs/concepts/metric_types/#gauge) measuring the event loop lag in milliseconds. This is the difference in milliseconds between a specified duration in a call to setTimeout and the actual duration experienced.
 
 ## <a name="memory"></a>Memory Metrics
 There are three metrics that are measuring the memory usage of the node process, obtained from a call to [process.memoryUsage](https://nodejs.org/docs/latest-v5.x/api/process.html#process_process_memoryusage):
 
-- **node\_memory\_rss\_bytes**: a [Gauge](https://prometheus.io/docs/concepts/metric_types/#gauge) measuring the [resident set size](http://en.wikipedia.org/wiki/Resident_set_size) in bytes.
-- **node\_memory\_heap\_total\_bytes**: a [Gauge](https://prometheus.io/docs/concepts/metric_types/#gauge) measuring the total heap in bytes.
-- **node\_memory\_heap\_used\_bytes**: a [Gauge](https://prometheus.io/docs/concepts/metric_types/#gauge) measuring the total heap used in bytes.
+- **nodejs\_memory\_rss\_bytes**: a [Gauge](https://prometheus.io/docs/concepts/metric_types/#gauge) measuring the [resident set size](http://en.wikipedia.org/wiki/Resident_set_size) in bytes.
+- **nodejs\_memory\_heap\_total\_bytes**: a [Gauge](https://prometheus.io/docs/concepts/metric_types/#gauge) measuring the total heap in bytes.
+- **nodejs\_memory\_heap\_used\_bytes**: a [Gauge](https://prometheus.io/docs/concepts/metric_types/#gauge) measuring the total heap used in bytes.
+
+## <a name="cpu"></a>CPU Metrics
+- **nodejs\_cpu_usage_microseconds\_total**: a [Counter](https://prometheus.io/docs/concepts/metric_types/#counter) measuring the CPU time spent in system and user space (accessible via the mode label).
+
+## <a name="gc"></a>Garbage Collection Metrics
+Garbage collection statistics are collected using gc-stats. They are broken down by the type of GC that occurred (minor,major, both)
+- **nodejs\_gc\_count**: Count of the number of GCs
+- **nodejs\_gc\_pause\_nanoseconds\_total**: total pause time, in nanoseconds, due to GC
+- **nodejs\_gc\_reclaimed\_bytes\_total**: total bytes reclaimed during GC
 
 # Installation
 ```
 > npm install --save epimetheus
 ```
-
 See examples below for examples of use with [http](#http), [express](#express), [hapi](#hapi) and [restify](#restify).
 
 # <a name="http"></a> http
