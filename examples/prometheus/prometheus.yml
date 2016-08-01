@@ -6,12 +6,3 @@ scrape_configs:
   - job_name: 'express'
     target_groups:
       - targets: ['express:8000']
-  - job_name: 'restify'
-    target_groups:
-      - targets: ['restify:8001']
-  - job_name: 'hapi'
-    target_groups:
-      - targets: ['hapi:8002']
-  - job_name: 'http'
-    target_groups:
-      - targets: ['http:8003']
