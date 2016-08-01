@@ -36,6 +36,7 @@
     "sinon": "*"
   },
   "dependencies": {
+    "gc-stats": "^1.0.0",
     "prom-client": "3.4.1"
   }
 }
