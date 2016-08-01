@@ -1,6 +1,6 @@
 const express = require('./lib/express');
 const eventLoop = require('./lib/event-loop');
-const memoryUsage = require('./lib/memory-usage');
+const memoryUsage = require('./lib/statistics');
 
 function instrument(app) {
   eventLoop.instrument();

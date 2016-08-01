@@ -8,7 +8,7 @@ module.exports = function() {
       return done(e);
     });
   });
-  
+
   it('should return 200 for /resource/id', (done) => {
     request('http://localhost:3000/resource/101', (e, r, b) => {
       r.statusCode.should.equal(200);
