@@ -1,17 +1,9 @@
-# Epimetheus 
-[![CircleCI](https://img.shields.io/circleci/project/roylines/node-epimetheus.svg)]()
-[![Coveralls](https://img.shields.io/coveralls/roylines/node-epimetheus.svg)]()
-[![David](https://img.shields.io/david/roylines/node-epimetheus.svg)]()
+# Epimetheus  - fork
+This is a customized fork of https://github.com/roylines/node-epimetheus
 
-[![NPM](https://nodei.co/npm/epimetheus.png)](https://nodei.co/npm/epimetheus/)
-
-Middleware to automatically instrument node applications for consumption by a [Prometheus](https://prometheus.io/) server. 
-
-Prometheus is an open source monitoring solution that obtains metrics from servers by querying against the /metrics endpoint upon them. 
- 
-Once instrumented, Epimetheus automatically serves [response duration](#duration), [event loop lag](#lag) and [memory](#memory) metrics on the /metrics endpoint ready to be consumed by Prometheus.
-
-Epimetheus will instrument websites and webservices that use [http](#http), [express](#express), [hapi](#hapi) and [restify](#restify).
+Only express is supported.
+Histogram has additional buckets
+Summary has the 1.0 quntile added
 
 # Instrumentation
 Epimetheus automatically measures a number of metrics once instrumented. There are 3 categories of instrumentation measured: [response duration](#duration), [event loop lag](#lag) and [memory](#memory). See below for details on each.

@@ -22,9 +22,7 @@ module.exports = function() {
       should.exist(r.headers['content-type']);
       r.headers['content-type'].should.equal('text/plain; charset=utf-8');
       b.should.have.string('# HELP ');
-      b.should.have.string('"/resource/"');
-      b.should.have.string('cardinality="one"');
-      b.should.have.string('cardinality="many"');
+      b.should.have.string('"/resource/:id"');
       b.should.have.string('status="200"');
       return done(e);
     });

@@ -30,11 +30,9 @@
     "chai": "*",
     "coveralls": "*",
     "express": "*",
-    "hapi": "*",
     "istanbul": "*",
     "mocha": "*",
     "request": "*",
-    "restify": "*",
     "sinon": "*"
   },
   "dependencies": {
