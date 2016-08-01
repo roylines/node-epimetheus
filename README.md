@@ -46,27 +46,8 @@ Garbage collection statistics are collected using gc-stats. They are broken down
 ```
 > npm install --save epimetheus
 ```
-See examples below for examples of use with [http](#http), [express](#express), [hapi](#hapi) and [restify](#restify).
+See examples below for examples of use with [express](#express).
 
-# <a name="http"></a> http
-```
-const http = require('http');
-const epimetheus = require('../../index');
-
-const server = http.createServer((req, res) => {
-  if(req.url !== '/metrics') {
-    res.statusCode = 200;
-    res.end();
-  }
-});
-
-epimetheus.instrument(server);
-
-server.listen(8003, '127.0.0.1', () => {
-  console.log('http listening on 8003'); 
-});
-
-```
 # <a name="express"></a> Express
 ```
 const express = require('express');
@@ -81,50 +62,6 @@ app.get('/', (req, res) => {
 
 app.listen(3000, () => {
   console.log('express server listening on port 3000');
-});
-
-```
-# <a name="hapi"></a> Hapi
-```
-const Hapi = require('hapi');
-const epimetheus = require('epimetheus');
-
-const server = new Hapi.Server();
-
-server.connection({
-  port: 3000
-});
-    
-epimetheus.instrument(this.server);
-    
-server.route({
-  method: 'GET',
-  path: '/',
-  handler: (req, resp) => {
-    resp();
-  }
-});
-   
-server.start(() => {
-  console.log('hapi server listening on port 3000');
-});
-```
-# <a name="restify"></a> Restify
-```
-const restify = require('restify');
-const epimetheus = require('epimetheus');
-
-const server = restify.createServer();
-
-epimetheus.instrument(this.server);
-
-server.get('/', (req, res, done) => {
-  res.send();
-  done();
-});
-
-server.listen(3000, () => {
-  console.log('restify server listening on port 3000');
 });
 
 ```
