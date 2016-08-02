@@ -14,7 +14,8 @@ Once instrumented, Epimetheus automatically serves [response duration](#duration
 Epimetheus will instrument websites and webservices that use [http](#http), [express](#express), [hapi](#hapi) and [restify](#restify).
 
 # Instrumentation
-Epimetheus automatically measures a number of metrics once instrumented. There are 3 categories of instrumentation measured: [response duration](#duration), [event loop lag](#lag) and [memory](#memory). See below for details on each.
+Epimetheus automatically measures a number of metrics once instrumented. 
+There are 3 categories of instrumentation measured: [response duration](#duration), [event loop lag](#lag) and [memory](#memory). See below for details on each.
 The following metrics are instrumented via the /metrics endpoint:
 
 ## <a name="duration"></a> Duration Metrics
@@ -47,7 +48,16 @@ There are three metrics that are measuring the memory usage of the node process,
 > npm install --save epimetheus
 ```
 
-See examples below for examples of use with [http](#http), [express](#express), [hapi](#hapi) and [restify](#restify).
+Epimetheus has only one method, instrument, and it has the following signature:
+## instrument(server, options)
+
+The first argument represents the server of the middleware. 
+
+The second argument is optional, and allows some configuration of epimetheus
+
+- `url` - the url on which to serve metrics. Defaults to `/metrics`.
+
+See the following examples of use with [http](#http), [express](#express), [hapi](#hapi) and [restify](#restify).
 
 # <a name="http"></a> http
 ```
@@ -129,6 +139,7 @@ server.listen(3000, () => {
 });
 
 ```
+
 # Try It Out
 The docker-compose.yml file in the examples directory will create a prometheus server and an example each of an [http](#http), [express](#express), [hapi](#hapi) and [restify](#restify) server. 
 
