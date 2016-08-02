@@ -38,6 +38,6 @@
     "sinon": "*"
   },
   "dependencies": {
-    "prom-client": "3.4.1"
+    "prom-client": "3.4.6"
   }
 }
