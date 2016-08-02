@@ -1,23 +1,31 @@
+const defaults = require('../lib/defaults');
 const express = require('express');
 const epithemeus = require('../index');
 const assertExpectations = require('./assert-expectations');
 
-describe('express', () => {
-  before((done) => {
-    const app = express();
-    epithemeus.instrument(app);
-    app.get('/', (req, res) => {
-      res.send();
+function setup(options) {
+  return describe('express ' + options.url, () => {
+    before((done) => {
+      const app = express();
+      epithemeus.instrument(app, options);
+      app.get('/', (req, res) => {
+        res.send();
+      });
+      app.get('/resource/:id', (req, res) => {
+        res.send();
+      });
+      this.server = app.listen(3000, done);
     });
-    app.get('/resource/:id', (req, res) => {
-      res.send();
+
+    after((done) => {
+      return this.server.close(done)
     });
-    this.server = app.listen(3000, done);
-  });
 
-  after((done) => {
-    return this.server.close(done)
+    assertExpectations(options);
   });
+}
 
-  assertExpectations();
+setup(defaults());
+setup({
+  url: '/xxx'
 });

@@ -1,7 +1,8 @@
 const request = require('request');
 const should = require('chai').should();
 
-module.exports = function() {
+module.exports = function(options) {
+    
   it('should return 200 for /', (done) => {
     request('http://localhost:3000/', (e, r, b) => {
       r.statusCode.should.equal(200);
@@ -16,8 +17,8 @@ module.exports = function() {
     });
   });
 
-  it('should return 200 for /metrics', (done) => {
-    request('http://localhost:3000/metrics', (e, r, b) => {
+  it('should return 200 for ' + options.url, (done) => {
+    request('http://localhost:3000' + options.url, (e, r, b) => {
       r.statusCode.should.equal(200);
       should.exist(r.headers['content-type']);
       r.headers['content-type'].should.equal('text/plain; charset=utf-8');
