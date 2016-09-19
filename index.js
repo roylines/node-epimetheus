@@ -1,16 +1,19 @@
+const defaultClient = require('prom-client');
 const express = require('./lib/express');
-const eventLoop = require('./lib/event-loop');
-const memoryUsage = require('./lib/statistics');
+const metrics = require('./lib/metrics');
 
 function instrument(app) {
-  eventLoop.instrument();
-  memoryUsage.instrument();
+  instrumentWithClient(app,defaultClient)
+}
 
+function instrumentWithClient(app,client) {
+  epClient = metrics.addMetrics(client)
   if (express.instrumentable(app)) {
-    express.instrument(app);
+    express.instrument(app,epClient);
   }
 }
 
 module.exports = {
-  instrument: instrument
+  instrument: instrument,
+  instrumentWithClient: instrumentWithClient
 }
