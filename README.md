@@ -14,8 +14,8 @@ The following metrics are instrumented via the /metrics endpoint:
 ## <a name="duration"></a> Duration Metrics
 There are two metrics measuring request duration:
 
-- **http\_request\_duration\_milliseconds (summary)**: a [summary](https://prometheus.io/docs/concepts/metric_types/#summary) metric measuring the duration in milliseconds of all requests. It can be used to [calculate average request durations](https://prometheus.io/docs/practices/histograms/#count-and-sum-of-observations).
-- **http\_request\_buckets\_milliseconds (histogram)**: a [histogram](https://prometheus.io/docs/concepts/metric_types/#histogram) metric used to count duration in buckets of sizes 500ms and 2000ms. This can be used to [calculate apdex](https://prometheus.io/docs/practices/histograms/#apdex-score) using a response time threshold of 500ms.
+- **http\_request\_duration\_seconds (summary)**: a [summary](https://prometheus.io/docs/concepts/metric_types/#summary) metric measuring the duration in seconds of all requests. It can be used to [calculate average request durations](https://prometheus.io/docs/practices/histograms/#count-and-sum-of-observations).
+- **http\_request\_buckets\_seconds (histogram)**: a [histogram](https://prometheus.io/docs/concepts/metric_types/#histogram) metric used to count duration in buckets of sizes 500ms and 2000ms. This can be used to [calculate apdex](https://prometheus.io/docs/practices/histograms/#apdex-score) using a response time threshold of 500ms.
 
 In each case, the following [labels](https://prometheus.io/docs/practices/naming/#labels) are used:
 
@@ -38,9 +38,10 @@ const epimetheus = require('epimetheus');
 const app = express();
 epimetheus.instrumentWithClient(app,client);
 
-var myCounter = new client.Counter('','')
+var myCounter = new client.Counter('thing_something_requests_total','Count of something requests')
 
 app.get('/', (req, res) => {
+  myCoutner.inc()
   res.send();
 });
 
@@ -50,7 +51,7 @@ app.listen(3000, () => {
 
 ```
 # Try It Out
-The docker-compose.yml file in the examples directory will create a prometheus server and an example each of an [http](#http), [express](#express), [hapi](#hapi) and [restify](#restify) server. 
+The docker-compose.yml file in the examples directory will create a prometheus server and an example each of an [http](#http), [express](#express), [hapi](#hapi) and [restify](#restify) server.
 
 Assuming you have installed [docker](https://docs.docker.com) and [docker-compose](https://docs.docker.com/compose/install/), you can try it out by doing the following:
 
@@ -66,5 +67,5 @@ You can then view the prometheus server on [http://127.0.0.1:9090](http://127.0.
 ![Epimetheus](http://www.greekmythology.com/images/mythology/epimetheus_28.jpg)
 
 Epimetheus was one of the Titans and the brother of Prometheus
-His name is derived from the Greek word meaning 'afterthought', 
-which is the antonym of his brother's name, Prometheus, meaning 'forethought'. 
+His name is derived from the Greek word meaning 'afterthought',
+which is the antonym of his brother's name, Prometheus, meaning 'forethought'.

@@ -36,7 +36,6 @@
     "sinon": "*"
   },
   "dependencies": {
-    "gc-stats": "^1.0.0",
-    "prom-client": "4.0.0"
+    "prom-client": "https://github.com/QubitProducts/prom-client/archive/master.tar.gz"
   }
 }
