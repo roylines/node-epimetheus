@@ -1,7 +1,10 @@
 {
-  "name": "epimetheus",
-  "version": "0.0.1",
+  "name": "@qutics/epimetheus",
+  "version": "0.0.2",
   "description": "node middleware to automatically instrument node applications for consumption by prometheus",
+  "publishConfig": {
+    "registry": "https://registry.qubit.com/"
+  },
   "main": "index.js",
   "scripts": {
     "test": "istanbul cover _mocha -dir $CIRCLE_ARTIFACTS",
@@ -36,6 +39,6 @@
     "sinon": "*"
   },
   "dependencies": {
-    "prom-client": "https://github.com/QubitProducts/prom-client/archive/master.tar.gz"
+    "@qutics/prom-client": "4.1.0"
   }
 }
