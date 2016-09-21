@@ -26,7 +26,7 @@ describe('express', () => {
 
 describe('express with client', () => {
   before((done) => {
-    const client = require('prom-client');
+    const client = require('@qutics/prom-client');
     const app = express();
     epithemeus.instrumentWithClient(app,client);
     mycounter = new client.Counter('mymetrics_things_counter_total','a metric')

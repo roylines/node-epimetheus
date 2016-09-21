@@ -1,4 +1,4 @@
-const defaultClient = require('prom-client');
+const defaultClient = require('@qutics/prom-client');
 const express = require('./lib/express');
 const metrics = require('./lib/metrics');
 
