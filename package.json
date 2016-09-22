@@ -1,6 +1,6 @@
 {
   "name": "@qutics/epimetheus",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "node middleware to automatically instrument node applications for consumption by prometheus",
   "publishConfig": {
     "registry": "https://registry.qubit.com/"
@@ -39,6 +39,6 @@
     "sinon": "*"
   },
   "dependencies": {
-    "@qutics/prom-client": "4.1.0"
+    "@qutics/prom-client": "*"
   }
 }
