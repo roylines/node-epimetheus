@@ -31,3 +31,7 @@ setup(defaults());
 setup({
   url: '/xxx'
 });
+setup({
+  url: '/admin-metrics',
+  port: 3001
+});
