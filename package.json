@@ -37,7 +37,7 @@
     "restify": "*",
     "sinon": "*"
   },
-  "dependencies": {
-    "prom-client": "3.4.6"
+  "peerDependencies": {
+    "prom-client": ">= 3.2 < 7"
   }
 }
