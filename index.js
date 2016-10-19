@@ -13,13 +13,13 @@ function instrument(app, options) {
   memoryUsage.instrument();
 
   if (hapi.instrumentable(app)) {
-    hapi.instrument(app, options);
+    return hapi.instrument(app, options);
   } else if (express.instrumentable(app)) {
-    express.instrument(app, options);
+    return express.instrument(app, options);
   } else if (restify.instrumentable(app)) {
-    restify.instrument(app, options);
+    return restify.instrument(app, options);
   } else if (http.instrumentable(app)) {
-    http.instrument(app, options);
+    return http.instrument(app, options);
   }
 }
 
