@@ -27,17 +27,17 @@
     "node": ">=4.0.0"
   },
   "devDependencies": {
-    "chai": "*",
-    "coveralls": "*",
-    "express": "*",
-    "hapi": "*",
-    "istanbul": "*",
-    "mocha": "*",
-    "request": "*",
-    "restify": "*",
-    "sinon": "*"
+    "chai": "^4.0.2",
+    "coveralls": "^2.13.1",
+    "express": "^4.15.3",
+    "hapi": "^16.4.3",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.4.2",
+    "request": "^2.81.0",
+    "restify": "^5.0.0",
+    "sinon": "^2.3.6"
   },
-  "peerDependencies": {
-    "prom-client": ">= 3.2 < 7"
+  "dependencies": {
+    "prom-client": "^10.0.0"
   }
 }
