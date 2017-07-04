@@ -1,31 +1,31 @@
-const defaults = require('../lib/defaults');
-const express = require('express');
-const epithemeus = require('../index');
-const assertExpectations = require('./assert-expectations');
+const defaults = require('../lib/defaults')
+const express = require('express')
+const epithemeus = require('../index')
+const assertExpectations = require('./assert-expectations')
 
-function setup(options) {
+function setup (options) {
   return describe('express ' + options.url, () => {
     before((done) => {
-      const app = express();
-      epithemeus.instrument(app, options);
+      const app = express()
+      epithemeus.instrument(app, options)
       app.get('/', (req, res) => {
-        res.send();
-      });
+        res.send()
+      })
       app.get('/resource/:id', (req, res) => {
-        res.send();
-      });
-      this.server = app.listen(3000, done);
-    });
+        res.send()
+      })
+      this.server = app.listen(3000, done)
+    })
 
     after((done) => {
       return this.server.close(done)
-    });
+    })
 
-    assertExpectations(options);
-  });
+    assertExpectations(options)
+  })
 }
 
-setup(defaults());
+setup(defaults())
 setup({
   url: '/xxx'
-});
+})
