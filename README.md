@@ -1,21 +1,20 @@
-# Epimetheus 
+# Epimetheus
 [![CircleCI](https://img.shields.io/circleci/project/roylines/node-epimetheus.svg)]()
 [![Coveralls](https://img.shields.io/coveralls/roylines/node-epimetheus.svg)]()
 [![David](https://img.shields.io/david/roylines/node-epimetheus.svg)]()
 
 [![NPM](https://nodei.co/npm/epimetheus.png)](https://nodei.co/npm/epimetheus/)
 
-Middleware to automatically instrument node applications for consumption by a [Prometheus](https://prometheus.io/) server. 
+Middleware to automatically instrument node applications for consumption by a [Prometheus](https://prometheus.io/) server.
 
-Prometheus is an open source monitoring solution that obtains metrics from servers by querying against the /metrics endpoint upon them. 
- 
-Once instrumented, Epimetheus automatically serves [response duration](#duration), [event loop lag](#lag) and [memory](#memory) metrics on the /metrics endpoint ready to be consumed by Prometheus.
+Prometheus is an open source monitoring solution that obtains metrics from servers by querying against the /metrics endpoint upon them.
+
+Once instrumented, Epimetheus automatically serves [response duration](#duration) metrics, plus nodejs [system metrics](#system) on the /metrics endpoint ready to be consumed by Prometheus.
 
 Epimetheus will instrument websites and webservices that use [http](#http), [express](#express), [hapi](#hapi) and [restify](#restify).
 
 # Instrumentation
-Epimetheus automatically measures a number of metrics once instrumented. 
-There are 3 categories of instrumentation measured: [response duration](#duration), [event loop lag](#lag) and [memory](#memory). See below for details on each.
+Epimetheus automatically measures a number of metrics once instrumented.
 The following metrics are instrumented via the /metrics endpoint:
 
 ## <a name="duration"></a> Duration Metrics
@@ -31,17 +30,8 @@ In each case, the following [labels](https://prometheus.io/docs/practices/naming
 - **path**: the path of the request. Note that /users/freddie is labelled /users/ so as not to flood prometheus with labels
 - **cardinality**: the cardinality of the request, e.g. /users/freddie has cardinality 'one', /users/ has cardinality 'many'
 
-## <a name="lag"></a>Event Loop Lag Metrics
-The node event loop lag can be an [strong indication](https://strongloop.com/strongblog/node-js-performance-event-loop-monitoring/) of performance issues caused by node event loop blocking. The following metric can be used to monitor event loop lag:
-
-- **node\_lag\_duration\_milliseconds**: a [Gauge](https://prometheus.io/docs/concepts/metric_types/#gauge) measuring the event loop lag in milliseconds. This is the difference in milliseconds between a specified duration in a call to setTimeout and the actual duration experienced.
-
-## <a name="memory"></a>Memory Metrics
-There are three metrics that are measuring the memory usage of the node process, obtained from a call to [process.memoryUsage](https://nodejs.org/docs/latest-v5.x/api/process.html#process_process_memoryusage):
-
-- **node\_memory\_rss\_bytes**: a [Gauge](https://prometheus.io/docs/concepts/metric_types/#gauge) measuring the [resident set size](http://en.wikipedia.org/wiki/Resident_set_size) in bytes.
-- **node\_memory\_heap\_total\_bytes**: a [Gauge](https://prometheus.io/docs/concepts/metric_types/#gauge) measuring the total heap in bytes.
-- **node\_memory\_heap\_used\_bytes**: a [Gauge](https://prometheus.io/docs/concepts/metric_types/#gauge) measuring the total heap used in bytes.
+## <a name="system"></a> System Metrics
+These are metrics provided by [prom-client](https://github.com/siimon/prom-client#default-metrics) that instrument the nodejs heap/rss usage and cpu usage etc.
 
 # Installation
 ```
@@ -51,7 +41,7 @@ There are three metrics that are measuring the memory usage of the node process,
 Epimetheus has only one method, instrument, and it has the following signature:
 ## instrument(server, options)
 
-The first argument represents the server of the middleware. 
+The first argument represents the server of the middleware.
 
 The second argument is optional, and allows some configuration of epimetheus
 
@@ -74,7 +64,7 @@ const server = http.createServer((req, res) => {
 epimetheus.instrument(server);
 
 server.listen(8003, '127.0.0.1', () => {
-  console.log('http listening on 8003'); 
+  console.log('http listening on 8003');
 });
 
 ```
@@ -85,7 +75,7 @@ const epimetheus = require('epimetheus');
 
 const app = express();
 epimetheus.instrument(app);
-    
+
 app.get('/', (req, res) => {
   res.send();
 });
@@ -105,9 +95,9 @@ const server = new Hapi.Server();
 server.connection({
   port: 3000
 });
-    
+
 epimetheus.instrument(this.server);
-    
+
 server.route({
   method: 'GET',
   path: '/',
@@ -115,7 +105,7 @@ server.route({
     resp();
   }
 });
-   
+
 server.start(() => {
   console.log('hapi server listening on port 3000');
 });
@@ -141,7 +131,7 @@ server.listen(3000, () => {
 ```
 
 # Try It Out
-The docker-compose.yml file in the examples directory will create a prometheus server and an example each of an [http](#http), [express](#express), [hapi](#hapi) and [restify](#restify) server. 
+The docker-compose.yml file in the examples directory will create a prometheus server and an example each of an [http](#http), [express](#express), [hapi](#hapi) and [restify](#restify) server.
 
 Assuming you have installed [docker](https://docs.docker.com) and [docker-compose](https://docs.docker.com/compose/install/), you can try it out by doing the following:
 
@@ -157,5 +147,5 @@ You can then view the prometheus server on [http://127.0.0.1:9090](http://127.0.
 ![Epimetheus](http://www.greekmythology.com/images/mythology/epimetheus_28.jpg)
 
 Epimetheus was one of the Titans and the brother of Prometheus
-His name is derived from the Greek word meaning 'afterthought', 
-which is the antonym of his brother's name, Prometheus, meaning 'forethought'. 
+His name is derived from the Greek word meaning 'afterthought',
+which is the antonym of his brother's name, Prometheus, meaning 'forethought'.
