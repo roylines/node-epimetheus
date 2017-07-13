@@ -1,15 +1,15 @@
-const defaultClient = require('@qutics/prom-client');
-const express = require('./lib/express');
-const metrics = require('./lib/metrics');
+const defaultClient = require('@qutics/prom-client')
+const express = require('./lib/express')
+const metrics = require('./lib/metrics')
 
-function instrument(app) {
-  instrumentWithClient(app,defaultClient)
+function instrument (app, settings) {
+  instrumentWithClient(app, defaultClient, settings)
 }
 
-function instrumentWithClient(app,client) {
-  epClient = metrics.addMetrics(client)
+function instrumentWithClient (app, client, settings) {
+  const epClient = metrics.addMetrics(client, settings)
   if (express.instrumentable(app)) {
-    express.instrument(app,epClient);
+    express.instrument(app, epClient)
   }
 }
 
