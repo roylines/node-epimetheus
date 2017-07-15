@@ -7,6 +7,9 @@
     "test": "istanbul cover _mocha -dir $CIRCLE_ARTIFACTS",
     "coveralls": "cat $CIRCLE_ARTIFACTS/lcov.info | coveralls"
   },
+  "git-pre-hooks": {
+    "pre-push": "npm test"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/roylines/node-epimetheus.git"
@@ -30,6 +33,7 @@
     "chai": "^4.0.2",
     "coveralls": "^2.13.1",
     "express": "^4.15.3",
+    "git-pre-hooks": "^1.2.0",
     "hapi": "^16.4.3",
     "istanbul": "^0.4.5",
     "mocha": "^3.4.2",
