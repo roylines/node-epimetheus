@@ -17,6 +17,7 @@ function setup (options) {
         method: 'GET',
         path: '/',
         handler: (req, resp) => {
+          require('./custom-metrics').count.inc();
           resp()
         }
       })
@@ -24,6 +25,7 @@ function setup (options) {
         method: 'GET',
         path: '/resource/101',
         handler: (req, resp) => {
+          require('./custom-metrics').count.inc();
           resp()
         }
       })

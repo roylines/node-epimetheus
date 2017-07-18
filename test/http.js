@@ -7,6 +7,7 @@ function setup (options) {
   return describe('native ' + options.url, () => {
     before((done) => {
       this.server = http.createServer((req, res) => {
+        require('./custom-metrics').count.inc();
         if (req.url !== options.url) {
           res.statusCode = 200
           res.end()

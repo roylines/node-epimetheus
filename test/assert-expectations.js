@@ -1,10 +1,22 @@
 const request = require('request')
 const should = require('chai').should()
+const client = require('../').prometheus;
+
+function getTestCount() {
+  return client.register.getSingleMetric('test_counter').get().values[0].value;
+}
 
 module.exports = function (options) {
+  let previousCount = null;
+  
+  beforeEach(() => {
+    previousCount = client.register.getSingleMetric('test_counter').get().values[0].value;
+  });
+
   it('should return 200 for /', (done) => {
     request('http://localhost:3000/', (e, r, b) => {
       r.statusCode.should.equal(200)
+      getTestCount().should.be.above(previousCount);
       return done(e)
     })
   })
@@ -12,6 +24,7 @@ module.exports = function (options) {
   it('should return 200 for /resource/id', (done) => {
     request('http://localhost:3000/resource/101', (e, r, b) => {
       r.statusCode.should.equal(200)
+      getTestCount().should.be.above(previousCount);
       return done(e)
     })
   })
