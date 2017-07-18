@@ -24,5 +24,6 @@ function instrument (app, options) {
 }
 
 module.exports = {
-  instrument: instrument
+  instrument: instrument,
+  prometheus: require('prom-client')
 }

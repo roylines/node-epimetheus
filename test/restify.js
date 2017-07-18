@@ -9,10 +9,12 @@ function setup (options) {
       this.server = restify.createServer()
       epithemeus.instrument(this.server, options)
       this.server.get('/', (req, res, done) => {
+        require('./custom-metrics').count.inc();
         res.send()
         done()
       })
       this.server.get('/resource/:id', (req, res, done) => {
+        require('./custom-metrics').count.inc();
         res.send()
         done()
       })

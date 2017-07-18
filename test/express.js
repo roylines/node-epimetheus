@@ -9,9 +9,11 @@ function setup (options) {
       const app = express()
       epithemeus.instrument(app, options)
       app.get('/', (req, res) => {
+        require('./custom-metrics').count.inc();
         res.send()
       })
       app.get('/resource/:id', (req, res) => {
+        require('./custom-metrics').count.inc();
         res.send()
       })
       this.server = app.listen(3000, done)
