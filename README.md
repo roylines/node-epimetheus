@@ -152,6 +152,17 @@ Assuming you have installed [docker](https://docs.docker.com) and [docker-compos
 
 You can then view the prometheus server on [http://127.0.0.1:9090](http://127.0.0.1:9090)
 
+## Register your own metrics
+
+Epimetheus exposes the prometheus client it's using through the `prometheus`
+property. You can use this to register your own custom metrics:
+
+```
+const client = require('epimetheus').prometheus;
+
+new client.Counter({name: 'test_counter', help: 'A simple counter'});
+```
+
 # Etymology
 
 ![Epimetheus](http://www.greekmythology.com/images/mythology/epimetheus_28.jpg)
