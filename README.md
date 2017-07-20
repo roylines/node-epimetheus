@@ -1,13 +1,13 @@
-# Epimetheus  - fork
+# Epimetheus - fork
 This is a customized fork of https://github.com/roylines/node-epimetheus
 
 - Only express is supported.
 - Histogram has additional buckets
 - Summary has the 1.0 quntile added
 - Additional metrics beyond HTTP are removed (should be provided by prom-client)
-- instrumentWithClient allows you to provide a client to add metrics to
 
 # Instrumentation
+
 Epimetheus automatically measures a number of metrics once instrumented. There are 3 categories of instrumentation measured: [response duration](#duration), [event loop lag](#lag) and [memory](#memory). See below for details on each.
 The following metrics are instrumented via the /metrics endpoint:
 
@@ -24,33 +24,37 @@ In each case, the following [labels](https://prometheus.io/docs/practices/naming
 - **handler**: the handler of the request.
 
 # Installation
-```
-> npm install --save epimetheus
-```
-See examples below for examples of use with [express](#express).
 
-# <a name="express"></a> Express
 ```
-const client = require('prom-client');
-const express = require('express');
-const epimetheus = require('epimetheus');
+yarn add @qutics/epimetheus
+```
 
-const app = express();
-epimetheus.instrumentWithClient(app,client);
+# Usage
 
-var myCounter = new client.Counter('thing_something_requests_total','Count of something requests')
+```
+const prom = require('@qutics/prom-client')
+const instrument = require('@qutics/epimetheus')
+const express = require('express')
+
+const app = express()
+
+app.use(instrument(prom))
+
+var myCounter = new prom.Counter('thing_something_requests_total','Count of something requests')
 
 app.get('/', (req, res) => {
-  myCoutner.inc()
-  res.send();
-});
+  myCounter.inc()
+  res.send()
+})
 
 app.listen(3000, () => {
-  console.log('express server listening on port 3000');
-});
+  console.log('express server listening on port 3000')
+})
 
 ```
+
 # Try It Out
+
 The docker-compose.yml file in the examples directory will create a prometheus server and an example each of an [http](#http), [express](#express), [hapi](#hapi) and [restify](#restify) server.
 
 Assuming you have installed [docker](https://docs.docker.com) and [docker-compose](https://docs.docker.com/compose/install/), you can try it out by doing the following:
