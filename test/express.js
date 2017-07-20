@@ -1,61 +1,110 @@
-const request = require('request');
-const should = require('chai').should();
-const express = require('express');
-const epithemeus = require('../index');
-const assertExpectations = require('./assert-expectations');
+/* global describe it before after */
+
+const request = require('request')
+const should = require('chai').should()
+const express = require('express')
+const epithemeus = require('../index')
+const assertExpectations = require('./assert-expectations')
 
 describe('express', () => {
   before((done) => {
-    const app = express();
-    epithemeus.instrument(app);
+    const app = express()
+    epithemeus.instrument(app)
     app.get('/', (req, res) => {
-      res.send();
-    });
+      res.send()
+    })
     app.get('/resource/:id', (req, res) => {
-      res.send();
-    });
-    this.server = app.listen(3000, done);
-  });
+      res.send()
+    })
+    this.server = app.listen(3000, done)
+  })
 
   after((done) => {
     return this.server.close(done)
-  });
+  })
 
-  assertExpectations();
-});
+  assertExpectations()
+
+  it('should contain appropriate buckets', (done) => {
+    request('http://localhost:3000/metrics', (e, r, b) => {
+      r.statusCode.should.equal(200)
+      should.exist(r.headers['content-type'])
+      b.should.have.string('http_request_buckets_seconds_bucket{le="0.125",')
+      b.should.have.string('http_request_buckets_seconds_bucket{le="0.25",')
+      b.should.have.string('http_request_buckets_seconds_bucket{le="0.5",')
+      return done(e)
+    })
+  })
+})
 
 describe('express with client', () => {
   before((done) => {
-    const client = require('@qutics/prom-client');
-    const app = express();
-    epithemeus.instrumentWithClient(app,client);
-    mycounter = new client.Counter('mymetrics_things_counter_total','a metric')
+    const client = require('@qutics/prom-client')
+    const app = express()
+    epithemeus.instrumentWithClient(app, client)
+    let mycounter = new client.Counter('mymetrics_things_counter_total', 'a metric')
     app.get('/', (req, res) => {
       mycounter.inc()
-      res.send();
-    });
+      res.send()
+    })
     app.get('/resource/:id', (req, res) => {
-      res.send();
-    });
-    this.server = app.listen(3000, done);
-  });
+      res.send()
+    })
+    this.server = app.listen(3000, done)
+  })
 
   after((done) => {
     return this.server.close(done)
-  });
+  })
 
-  assertExpectations();
+  assertExpectations()
 
   it('should countain extra metrics', (done) => {
     request('http://localhost:3000/metrics', (e, r, b) => {
-      r.statusCode.should.equal(200);
-      should.exist(r.headers['content-type']);
-      r.headers['content-type'].should.equal('text/plain; charset=utf-8');
-      b.should.have.string('# HELP ');
-      b.should.have.string('"/resource/:id"');
-      b.should.have.string('status="200"');
-      b.should.have.string('mymetrics_things_counter_total');
-      return done(e);
-    });
-  });
-});
+      r.statusCode.should.equal(200)
+      should.exist(r.headers['content-type'])
+      r.headers['content-type'].should.equal('text/plain; charset=utf-8')
+      b.should.have.string('# HELP ')
+      b.should.have.string('"/resource/:id"')
+      b.should.have.string('status="200"')
+      b.should.have.string('mymetrics_things_counter_total')
+      return done(e)
+    })
+  })
+})
+
+describe('express', () => {
+  before((done) => {
+    const app = express()
+    epithemeus.instrument(app, {T: 1})
+    app.get('/', (req, res) => {
+      res.send()
+    })
+    app.get('/resource/:id', (req, res) => {
+      res.send()
+    })
+    this.server = app.listen(3000, done)
+  })
+
+  after((done) => {
+    return this.server.close(done)
+  })
+
+  assertExpectations()
+
+  it('should contain appropriate buckets', (done) => {
+    request('http://localhost:3000/metrics', (e, r, b) => {
+      r.statusCode.should.equal(200)
+      should.exist(r.headers['content-type'])
+      r.headers['content-type'].should.equal('text/plain; charset=utf-8')
+      b.should.have.string('http_request_buckets_seconds_bucket{le="0.125",')
+      b.should.have.string('http_request_buckets_seconds_bucket{le="0.25",')
+      b.should.have.string('http_request_buckets_seconds_bucket{le="0.5",')
+      b.should.have.string('http_request_buckets_seconds_bucket{le="1",')
+      b.should.have.string('http_request_buckets_seconds_bucket{le="2",')
+      b.should.have.string('http_request_buckets_seconds_bucket{le="4",')
+      b.should.not.have.string('http_request_buckets_seconds_bucket{le="16",')
+      return done(e)
+    })
+  })
+})
