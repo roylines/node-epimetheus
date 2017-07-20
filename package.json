@@ -1,6 +1,6 @@
 {
   "name": "@qutics/epimetheus",
-  "version": "0.0.7",
+  "version": "1.0.0",
   "description": "node middleware to automatically instrument node applications for consumption by prometheus",
   "publishConfig": {
     "registry": "https://registry.qubit.com/"
