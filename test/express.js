@@ -100,6 +100,7 @@ describe('custom apdex T value', () => {
       r.statusCode.should.equal(200)
       should.exist(r.headers['content-type'])
       r.headers['content-type'].should.equal('text/plain; charset=utf-8')
+      b.should.have.string('http_apdex_target_seconds 1')
       b.should.have.string('http_request_buckets_seconds_bucket{le="0.125",')
       b.should.have.string('http_request_buckets_seconds_bucket{le="0.25",')
       b.should.have.string('http_request_buckets_seconds_bucket{le="0.5",')
