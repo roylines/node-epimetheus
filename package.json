@@ -7,7 +7,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "istanbul cover _mocha -dir $CIRCLE_ARTIFACTS",
+    "test": "standard && istanbul cover _mocha -dir $CIRCLE_ARTIFACTS",
     "coveralls": "cat $CIRCLE_ARTIFACTS/lcov.info | coveralls"
   },
   "repository": {
@@ -30,15 +30,15 @@
     "node": ">=4.0.0"
   },
   "devDependencies": {
+    "@qutics/prom-client": "^5.1.0",
     "chai": "*",
     "coveralls": "*",
     "express": "*",
     "istanbul": "*",
     "mocha": "*",
     "request": "*",
-    "sinon": "*"
+    "sinon": "*",
+    "standard": "^10.0.2"
   },
-  "dependencies": {
-    "@qutics/prom-client": "*"
-  }
+  "dependencies": {}
 }

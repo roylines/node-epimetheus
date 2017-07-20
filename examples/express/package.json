@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "epimetheus": "*",
+    "@qutics/epimetheus": "*",
     "express": "*"
   }
 }
