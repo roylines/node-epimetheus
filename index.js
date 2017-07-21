@@ -3,14 +3,9 @@ const hapi = require('./lib/hapi')
 const express = require('./lib/express')
 const restify = require('./lib/restify')
 const http = require('./lib/http')
-const eventLoop = require('./lib/event-loop')
-const memoryUsage = require('./lib/memory-usage')
 
 function instrument (app, options) {
   options = defaults(options)
-
-  eventLoop.instrument()
-  memoryUsage.instrument()
 
   if (hapi.instrumentable(app)) {
     hapi.instrument(app, options)
