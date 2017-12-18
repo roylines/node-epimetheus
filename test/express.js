@@ -1,114 +1,112 @@
-/* global describe it before after */
+/* global describe it beforeEach afterEach */
 
-const request = require('request')
-const should = require('chai').should()
+const axios = require('axios')
+const assert = require('assert')
 const express = require('express')
 const prom = require('@qutics/prom-client')
 const instrument = require('../index')
-const assertExpectations = require('./assert-expectations')
 
 describe('typical usage', () => {
-  before((done) => {
+  beforeEach((done) => {
+    prom.register.clear()
     const app = express()
     app.use(instrument(prom))
-    app.get('/', (req, res) => {
-      res.send()
+    app.get('/', (req, res) => res.send())
+    app.get('/resource/:id', (req, res) => res.send())
+    this.server = app.listen(3039, async () => {
+      await generateRequests()
+      done()
     })
-    app.get('/resource/:id', (req, res) => {
-      res.send()
-    })
-    this.server = app.listen(3039, done)
   })
 
-  after((done) => {
-    prom.register.clear()
+  afterEach((done) => {
     return this.server.close(done)
   })
 
-  assertExpectations()
-
-  it('should contain appropriate buckets', (done) => {
-    request('http://localhost:3039/metrics', (e, r, b) => {
-      r.statusCode.should.equal(200)
-      should.exist(r.headers['content-type'])
-      b.should.have.string('http_request_buckets_seconds_bucket{le="0.125",')
-      b.should.have.string('http_request_buckets_seconds_bucket{le="0.25",')
-      b.should.have.string('http_request_buckets_seconds_bucket{le="0.5",')
-      return done(e)
-    })
+  it('contains appropriate buckets', async () => {
+    const res = await axios.get('http://localhost:3039/metrics')
+    assert.equal(res.status, 200)
+    assert(res.data.includes('http_request_buckets_seconds_bucket{le="0.125",'))
+    assert(res.data.includes('http_request_buckets_seconds_bucket{le="0.25",'))
+    assert(res.data.includes('http_request_buckets_seconds_bucket{le="0.5",'))
   })
 })
 
 describe('customer counter', () => {
-  before((done) => {
+  beforeEach((done) => {
+    prom.register.clear()
+    const counter = new prom.Counter(
+      'mymetrics_things_counter_total',
+      'a metric'
+    )
     const app = express()
     app.use(instrument(prom))
-    const mycounter = new prom.Counter('mymetrics_things_counter_total', 'a metric')
     app.get('/', (req, res) => {
-      mycounter.inc()
+      counter.inc()
       res.send()
     })
-    app.get('/resource/:id', (req, res) => {
-      res.send()
+    app.get('/resource/:id', (req, res) => res.send())
+    this.server = app.listen(3039, async () => {
+      await generateRequests()
+      done()
     })
-    this.server = app.listen(3039, done)
   })
 
-  after((done) => {
-    prom.register.clear()
+  afterEach((done) => {
     return this.server.close(done)
   })
 
-  assertExpectations()
-
-  it('should countain extra metrics', (done) => {
-    request('http://localhost:3039/metrics', (e, r, b) => {
-      r.statusCode.should.equal(200)
-      should.exist(r.headers['content-type'])
-      r.headers['content-type'].should.equal('text/plain; charset=utf-8')
-      b.should.have.string('# HELP ')
-      b.should.have.string('"/resource/:id"')
-      b.should.have.string('status="200"')
-      b.should.have.string('mymetrics_things_counter_total')
-      return done(e)
-    })
+  it('contains extra metrics', async () => {
+    const res = await axios.get('http://localhost:3039/metrics')
+    assert.equal(res.status, 200)
+    assert(res.data.includes('mymetrics_things_counter_total'))
   })
 })
 
 describe('custom apdex T value', () => {
-  before((done) => {
+  beforeEach((done) => {
+    prom.register.clear()
     const app = express()
     app.use(instrument(prom, { T: 1 }))
-    app.get('/', (req, res) => {
-      res.send()
+    app.get('/', (req, res) => res.send())
+    app.get('/resource/:id', (req, res) => res.send())
+    this.server = app.listen(3039, async () => {
+      await generateRequests()
+      done()
     })
-    app.get('/resource/:id', (req, res) => {
-      res.send()
-    })
-    this.server = app.listen(3039, done)
   })
 
-  after((done) => {
-    prom.register.clear()
+  afterEach((done) => {
     return this.server.close(done)
   })
 
-  assertExpectations()
-
-  it('should contain appropriate buckets', (done) => {
-    request('http://localhost:3039/metrics', (e, r, b) => {
-      r.statusCode.should.equal(200)
-      should.exist(r.headers['content-type'])
-      r.headers['content-type'].should.equal('text/plain; charset=utf-8')
-      b.should.have.string('http_apdex_target_seconds 1')
-      b.should.have.string('http_request_buckets_seconds_bucket{le="0.125",')
-      b.should.have.string('http_request_buckets_seconds_bucket{le="0.25",')
-      b.should.have.string('http_request_buckets_seconds_bucket{le="0.5",')
-      b.should.have.string('http_request_buckets_seconds_bucket{le="1",')
-      b.should.have.string('http_request_buckets_seconds_bucket{le="2",')
-      b.should.have.string('http_request_buckets_seconds_bucket{le="4",')
-      b.should.not.have.string('http_request_buckets_seconds_bucket{le="16",')
-      return done(e)
-    })
+  it('contains adjusted buckets', async () => {
+    const res = await axios.get('http://localhost:3039/metrics')
+    assert.equal(res.status, 200)
+    assert(res.data.includes('http_apdex_target_seconds 1'))
+    assert(res.data.includes('http_request_buckets_seconds_bucket{le="0.125",'))
+    assert(res.data.includes('http_request_buckets_seconds_bucket{le="0.25",'))
+    assert(res.data.includes('http_request_buckets_seconds_bucket{le="0.5",'))
+    assert(res.data.includes('http_request_buckets_seconds_bucket{le="1",'))
+    assert(res.data.includes('http_request_buckets_seconds_bucket{le="2",'))
+    assert(res.data.includes('http_request_buckets_seconds_bucket{le="4",'))
+    assert(!res.data.includes('http_request_buckets_seconds_bucket{le="16",'))
   })
 })
+
+async function generateRequests () {
+  let res
+
+  res = await axios.get('http://localhost:3039/')
+  assert.equal(res.status, 200)
+
+  res = await axios.get('http://localhost:3039/resource/101')
+  assert.equal(res.status, 200)
+
+  res = await axios.get('http://localhost:3039/metrics')
+  assert.equal(res.status, 200)
+  assert.equal(res.headers['content-type'], 'text/plain; charset=utf-8')
+  assert(res.data.includes('# HELP '))
+  assert(res.data.includes('"/resource/:id"'))
+  assert(res.data.includes('status="200"'))
+}
