@@ -1,5 +1,5 @@
 const express = require('express')
-const epithemeus = require('epimetheus')
+const epithemeus = require('node-epimetheus')
 
 const app = express()
 epithemeus.instrument(app)

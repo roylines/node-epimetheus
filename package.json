@@ -1,6 +1,6 @@
 {
-  "name": "epimetheus",
-  "version": "0.0.1",
+  "name": "node-epimetheus",
+  "version": "0.1.0",
   "description": "node middleware to automatically instrument node applications for consumption by prometheus",
   "main": "index.js",
   "scripts": {
@@ -20,12 +20,12 @@
     "express",
     "restify"
   ],
-  "author": "Roy Lines",
+  "author": "Ashok Sahoo",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/roylines/node-epimetheus/issues"
+    "url": "https://github.com/ashoksahoo/node-epimetheus/issues"
   },
-  "homepage": "https://github.com/roylines/node-epimetheus#readme",
+  "homepage": "https://github.com/ashoksahoo/node-epimetheus#readme",
   "engines": {
     "node": ">=4.0.0"
   },

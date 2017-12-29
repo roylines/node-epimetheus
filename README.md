@@ -35,7 +35,7 @@ These are metrics provided by [prom-client](https://github.com/siimon/prom-clien
 
 # Installation
 ```
-> npm install --save epimetheus
+> npm install --save node-epimetheus
 ```
 
 Epimetheus has only one method, instrument, and it has the following signature:
@@ -71,7 +71,7 @@ server.listen(8003, '127.0.0.1', () => {
 # <a name="express"></a> Express
 ```
 const express = require('express');
-const epimetheus = require('epimetheus');
+const epimetheus = require('node-epimetheus');
 
 const app = express();
 epimetheus.instrument(app);
@@ -88,7 +88,7 @@ app.listen(3000, () => {
 # <a name="hapi"></a> Hapi
 ```
 const Hapi = require('hapi');
-const epimetheus = require('epimetheus');
+const epimetheus = require('node-epimetheus');
 
 const server = new Hapi.Server();
 
@@ -113,7 +113,7 @@ server.start(() => {
 # <a name="restify"></a> Restify
 ```
 const restify = require('restify');
-const epimetheus = require('epimetheus');
+const epimetheus = require('node-epimetheus');
 
 const server = restify.createServer();
 
