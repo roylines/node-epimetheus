@@ -1,9 +1,9 @@
 # Epimetheus
-[![CircleCI](https://img.shields.io/circleci/project/roylines/node-epimetheus.svg)]()
-[![Coveralls](https://img.shields.io/coveralls/roylines/node-epimetheus.svg)]()
-[![David](https://img.shields.io/david/roylines/node-epimetheus.svg)]()
+[![CircleCI](https://img.shields.io/circleci/project/ashoksahoo/node-epimetheus.svg)]()
+[![Coverage Status](https://coveralls.io/repos/github/ashoksahoo/node-epimetheus/badge.svg?branch=master)](https://coveralls.io/github/ashoksahoo/node-epimetheus?branch=master)
+[![David](https://img.shields.io/david/ashoksahoo/node-epimetheus.svg)]()
 
-[![NPM](https://nodei.co/npm/epimetheus.png)](https://nodei.co/npm/epimetheus/)
+[![NPM](https://nodei.co/npm/node-epimetheus.png)](https://nodei.co/npm/node-epimetheus/)
 
 Middleware to automatically instrument node applications for consumption by a [Prometheus](https://prometheus.io/) server.
 
