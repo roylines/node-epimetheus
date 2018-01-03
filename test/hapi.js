@@ -11,22 +11,25 @@ function setup (options) {
       this.server = new Hapi.Server({
         port: 3000
       })
-      epithemeus.instrument(this.server, options)
-      this.server.route({
-        method: 'GET',
-        path: '/',
-        handler: () => {
-          return '';
-        }
-      })
-      this.server.route({
-        method: 'GET',
-        path: '/resource/101',
-        handler: () => {
-          return '';
-        }
-      })
-      return this.server.start()
+      
+      return epithemeus.instrument(this.server, options)
+        .then(() => {
+          this.server.route({
+            method: 'GET',
+            path: '/',
+            handler: () => {
+              return '';
+            }
+          })
+          this.server.route({
+            method: 'GET',
+            path: '/resource/101',
+            handler: () => {
+              return '';
+            }
+          })
+          return this.server.start()
+        })
     })
 
     after(() => {
