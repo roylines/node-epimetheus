@@ -90,9 +90,7 @@ app.listen(3000, () => {
 const Hapi = require('hapi');
 const epimetheus = require('epimetheus');
 
-const server = new Hapi.Server();
-
-server.connection({
+const server = new Hapi.Server({
   port: 3000
 });
 
