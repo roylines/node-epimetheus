@@ -34,7 +34,7 @@
     "coveralls": "^2.13.1",
     "express": "^4.15.3",
     "git-pre-hooks": "^1.2.0",
-    "hapi": "^16.4.3",
+    "hapi": "^17.0.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.4.2",
     "request": "^2.81.0",
