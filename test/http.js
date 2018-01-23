@@ -4,6 +4,8 @@ const epithemeus = require('../index')
 const assertExpectations = require('./assert-expectations')
 
 function setup (options) {
+  options.routePath = '/resource/101';
+
   return describe('native ' + options.url, () => {
     before((done) => {
       this.server = http.createServer((req, res) => {

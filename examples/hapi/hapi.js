@@ -1,5 +1,5 @@
 const Hapi = require('hapi')
-const epithemeus = require('epimetheus')
+const epithemeus = require('node-epimetheus')
 
 const server = new Hapi.Server()
 

@@ -1,5 +1,5 @@
 const restify = require('restify')
-const epithemeus = require('epimetheus')
+const epithemeus = require('node-epimetheus')
 
 const server = restify.createServer()
 epithemeus.instrument(server)

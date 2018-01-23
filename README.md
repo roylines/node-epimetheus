@@ -1,9 +1,9 @@
 # Epimetheus
-[![CircleCI](https://img.shields.io/circleci/project/roylines/node-epimetheus.svg)]()
-[![Coveralls](https://img.shields.io/coveralls/roylines/node-epimetheus.svg)]()
-[![David](https://img.shields.io/david/roylines/node-epimetheus.svg)]()
+[![CircleCI](https://img.shields.io/circleci/project/ashoksahoo/node-epimetheus.svg)]()
+[![Coverage Status](https://coveralls.io/repos/github/ashoksahoo/node-epimetheus/badge.svg?branch=master)](https://coveralls.io/github/ashoksahoo/node-epimetheus?branch=master)
+[![David](https://img.shields.io/david/ashoksahoo/node-epimetheus.svg)]()
 
-[![NPM](https://nodei.co/npm/epimetheus.png)](https://nodei.co/npm/epimetheus/)
+[![NPM](https://nodei.co/npm/node-epimetheus.png)](https://nodei.co/npm/node-epimetheus/)
 
 Middleware to automatically instrument node applications for consumption by a [Prometheus](https://prometheus.io/) server.
 
@@ -35,7 +35,7 @@ These are metrics provided by [prom-client](https://github.com/siimon/prom-clien
 
 # Installation
 ```
-> npm install --save epimetheus
+> npm install --save node-epimetheus
 ```
 
 Epimetheus has only one method, instrument, and it has the following signature:
@@ -71,7 +71,7 @@ server.listen(8003, '127.0.0.1', () => {
 # <a name="express"></a> Express
 ```
 const express = require('express');
-const epimetheus = require('epimetheus');
+const epimetheus = require('node-epimetheus');
 
 const app = express();
 epimetheus.instrument(app);
@@ -88,7 +88,7 @@ app.listen(3000, () => {
 # <a name="hapi"></a> Hapi
 ```
 const Hapi = require('hapi');
-const epimetheus = require('epimetheus');
+const epimetheus = require('node-epimetheus');
 
 const server = new Hapi.Server();
 
@@ -113,7 +113,7 @@ server.start(() => {
 # <a name="restify"></a> Restify
 ```
 const restify = require('restify');
-const epimetheus = require('epimetheus');
+const epimetheus = require('node-epimetheus');
 
 const server = restify.createServer();
 
