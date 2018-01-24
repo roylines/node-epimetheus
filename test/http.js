@@ -1,34 +1,34 @@
-const defaults = require('../lib/defaults');
-const http = require('http');
-const epithemeus = require('../index');
-const assertExpectations = require('./assert-expectations');
+const defaults = require('../lib/defaults')
+const http = require('http')
+const epithemeus = require('../index')
+const assertExpectations = require('./assert-expectations')
 
-function setup(options) {
+function setup (options) {
   options.routePath = '/resource/101';
 
   return describe('native ' + options.url, () => {
     before((done) => {
       this.server = http.createServer((req, res) => {
         if (req.url !== options.url) {
-          res.statusCode = 200;
-          res.end();
+          res.statusCode = 200
+          res.end()
         }
-      });
+      })
 
-      epithemeus.instrument(this.server, options);
+      epithemeus.instrument(this.server, options)
 
-      return this.server.listen(3000, '127.0.0.1', done);
-    });
+      return this.server.listen(3000, '127.0.0.1', done)
+    })
 
     after((done) => {
       return this.server.close(done)
-    });
+    })
 
-    assertExpectations(options);
-  });
+    assertExpectations(options)
+  })
 }
 
-setup(defaults());
+setup(defaults())
 setup({
   url: '/xxx'
-});
+})
