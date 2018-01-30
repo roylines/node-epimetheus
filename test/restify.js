@@ -4,6 +4,8 @@ const epithemeus = require('../index')
 const assertExpectations = require('./assert-expectations')
 
 function setup (options) {
+  options.routePath = '/resource/:id';
+
   describe('restify ' + options.url, () => {
     before((done) => {
       this.server = restify.createServer()
@@ -12,7 +14,7 @@ function setup (options) {
         res.send()
         done()
       })
-      this.server.get('/resource/:id', (req, res, done) => {
+      this.server.get(options.routePath, (req, res, done) => {
         res.send()
         done()
       })

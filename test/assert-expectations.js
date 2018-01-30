@@ -22,7 +22,7 @@ module.exports = function (options) {
       should.exist(r.headers['content-type'])
       r.headers['content-type'].should.equal('text/plain; charset=utf-8')
       b.should.have.string('# HELP ')
-      b.should.have.string('"/resource/"')
+      b.should.have.string('"' + options.routePath + '"')
       b.should.have.string('cardinality="one"')
       b.should.have.string('cardinality="many"')
       b.should.have.string('status="200"')

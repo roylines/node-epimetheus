@@ -6,6 +6,8 @@ const epithemeus = require('../index')
 const assertExpectations = require('./assert-expectations')
 
 function setup (options) {
+  options.routePath = '/resource/{id}';
+
   return describe('hapi ' + options.url, () => {
     before((done) => {
       this.server = new Hapi.Server()
@@ -22,7 +24,7 @@ function setup (options) {
       })
       this.server.route({
         method: 'GET',
-        path: '/resource/101',
+        path: options.routePath,
         handler: (req, resp) => {
           resp()
         }
