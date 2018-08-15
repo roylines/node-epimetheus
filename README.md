@@ -90,24 +90,23 @@ app.listen(3000, () => {
 const Hapi = require('hapi');
 const epimetheus = require('epimetheus');
 
-const server = new Hapi.Server();
-
-server.connection({
+const server = new Hapi.Server({
   port: 3000
 });
 
-epimetheus.instrument(this.server);
+epimetheus.instrument(this.server)
+  .then(() => {
+    server.route({
+      method: 'GET',
+      path: '/',
+      handler: (req, resp) => {
+        resp();
+      }
+    });
 
-server.route({
-  method: 'GET',
-  path: '/',
-  handler: (req, resp) => {
-    resp();
-  }
-});
-
-server.start(() => {
-  console.log('hapi server listening on port 3000');
+    return server.start(() => {
+      console.log('hapi server listening on port 3000');
+    });
 });
 ```
 # <a name="restify"></a> Restify

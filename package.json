@@ -1,6 +1,6 @@
 {
-  "name": "epimetheus",
-  "version": "0.0.1",
+  "name": "@r3pi/epimetheus",
+  "version": "1.1.1-hapi17",
   "description": "node middleware to automatically instrument node applications for consumption by prometheus",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/roylines/node-epimetheus.git"
+    "url": "ssh://git@bitbucket.r3pi.net:7999/rdpty/epimetheus.git"
   },
   "keywords": [
     "prometheus",
@@ -27,14 +27,14 @@
   },
   "homepage": "https://github.com/roylines/node-epimetheus#readme",
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=8.0.0"
   },
   "devDependencies": {
     "chai": "^4.0.2",
     "coveralls": "^2.13.1",
     "express": "^4.15.3",
     "git-pre-hooks": "^1.2.0",
-    "hapi": "^16.4.3",
+    "hapi": "^17.0.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.4.2",
     "request": "^2.81.0",
