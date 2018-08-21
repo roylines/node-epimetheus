@@ -1,6 +1,6 @@
 {
   "name": "epimetheus",
-  "version": "1.0.56",
+  "version": "0.0.1",
   "description": "node middleware to automatically instrument node applications for consumption by prometheus",
   "main": "index.js",
   "scripts": {
