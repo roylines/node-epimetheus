@@ -27,7 +27,7 @@ jobs:
           command: npm test 
 workflows:
   version: 2
-  terraform_build:
+  build:
     jobs:
       - test:
           context: org-global
