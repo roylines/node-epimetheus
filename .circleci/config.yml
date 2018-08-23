@@ -3,7 +3,7 @@ version: 2
 nodejs: &nodejs
   docker:
     - image: circleci/node:8.11
-  working_directory: /tmp/workspace/nodejs
+  working_directory: /tmp/workspace
 
 jobs:
   build:
@@ -24,6 +24,8 @@ jobs:
   test:
     <<: *nodejs
     steps:
+      - attach_workspace:
+          at: /tmp/workspace
       - run:
           name: npm install
           command: npm install
@@ -33,6 +35,8 @@ jobs:
   deploy:
     <<: *nodejs
     steps:
+      - attach_workspace:
+          at: /tmp/workspace
       - run:
           name: npm test
           command: npm test 
