@@ -16,9 +16,6 @@ jobs:
       - run:
           name: npm test
           command: npm test 
-      - persist_to_workspace:
-          root: .
-          paths: .
   deploy:
     <<: *nodejs
     steps:
