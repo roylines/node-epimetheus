@@ -2,7 +2,7 @@ version: 2
 
 nodejs: &nodejs
   docker:
-    - image: node/8.11-alpine
+    - image: circleci/node/8.11
   working_directory: /tmp/workspace/nodejs
 
 jobs:
