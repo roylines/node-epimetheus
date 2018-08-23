@@ -6,10 +6,24 @@ nodejs: &nodejs
   working_directory: /tmp/workspace/nodejs
 
 jobs:
-  test:
+  build:
     <<: *nodejs
     steps:
       - checkout
+      - run:
+          name: npm install --production
+          command: npm install --production
+      - persist_to_workspace:
+          root: .
+          paths:
+            - node_modules
+            - index.js
+            - package.json
+            - lib
+
+  test:
+    <<: *nodejs
+    steps:
       - run:
           name: npm install
           command: npm install
@@ -26,8 +40,10 @@ workflows:
   version: 2
   build:
     jobs:
+      - build
       - test:
-          context: org-global
+          requires: 
+            - build
       - deploy:
           context: org-global
           requires: 
