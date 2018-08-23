@@ -43,7 +43,7 @@ jobs:
           name: setup auth
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
       - run:
-          name: set npm version
+          name: set npm version to build
           command: npm version "1.0.$CIRCLE_BUILD_NUM" --no-git-tag-version
       -run:
           name: npm publish
