@@ -45,7 +45,7 @@ jobs:
       - run:
           name: set npm version to build
           command: npm version "1.0.$CIRCLE_BUILD_NUM" --no-git-tag-version
-      -run:
+      - run:
           name: npm publish
           command: npm publish
 
