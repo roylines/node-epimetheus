@@ -1,0 +1,40 @@
+version: 2
+
+nodejs: &nodejs
+  docker:
+    - image: node/8.11-alpine
+  working_directory: /tmp/workspace/nodejs
+
+jobs:
+  test:
+    <<: *nodejs
+    steps:
+      - checkout
+      - run:
+          name: npm install
+          command: npm install
+      - run:
+          name: npm test
+          command: npm test 
+      - persist_to_workspace:
+          root: .
+          paths: .
+  deploy:
+    <<: *nodejs
+    steps:
+      - run:
+          name: npm test
+          command: npm test 
+workflows:
+  version: 2
+  terraform_build:
+    jobs:
+      - test:
+          context: org-global
+      - deploy:
+          context: org-global
+          requires: 
+            - test
+          filters: 
+            branches: 
+              only: circle2
