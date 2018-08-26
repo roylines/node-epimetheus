@@ -21,6 +21,7 @@ jobs:
             - package.json
             - package-lock.json
             - lib
+            - README.md
 
   test:
     <<: *nodejs
