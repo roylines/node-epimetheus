@@ -4,8 +4,10 @@ const epithemeus = require('../index')
 const assertExpectations = require('./assert-expectations')
 const assert = require('chai').assert
 const libExpress = require('../lib/express')
+const request = require('request')
+const should = require('chai').should()
 
-function setup (options) {
+function setup(options) {
   return describe('express ' + options.url, () => {
     before((done) => {
       const app = express()
@@ -16,7 +18,13 @@ function setup (options) {
       app.get('/resource/:id', (req, res) => {
         res.send()
       })
-      this.server = app.listen(3000, done)
+      this.server = app.listen(3000, () => {
+        if (options.metricsServer) {
+          options.metricsServer.listen(3001, done);
+        } else {
+          done()
+        }
+      });
     })
 
     after((done) => {
@@ -32,11 +40,18 @@ setup({
   url: '/xxx'
 })
 
+setup({
+  url: '/metrics',
+  metricsServer: express()
+})
+
 describe('express should check "instrumentablity" properly', () => {
   it('should return true when express conditions are correct', () => {
     // Arrange
     const server = () => {}
-    server.defaultConfiguration = { sample: true }
+    server.defaultConfiguration = {
+      sample: true
+    }
     server.use = () => {}
 
     // Act
@@ -69,7 +84,9 @@ describe('express should check "instrumentablity" properly', () => {
   it('should return false when server does not have a use function', () => {
     // Arrange
     const server = () => {}
-    server.defaultConfiguration = { sample: true }
+    server.defaultConfiguration = {
+      sample: true
+    }
 
     // Act
     const actual = libExpress.instrumentable(server)
