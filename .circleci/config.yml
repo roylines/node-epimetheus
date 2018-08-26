@@ -63,4 +63,4 @@ workflows:
             - test
           filters: 
             branches: 
-              only: circle2
+              only: master
