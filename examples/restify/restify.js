@@ -5,7 +5,8 @@ const server = restify.createServer()
 epithemeus.instrument(server)
 
 server.get('/', function (req, res, done) {
-  var high = 500, low = 150
+  let high = 500
+  let low = 150
 
   setTimeout(() => {
     res.send()

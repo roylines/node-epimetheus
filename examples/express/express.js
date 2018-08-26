@@ -5,7 +5,8 @@ const app = express()
 epithemeus.instrument(app)
 
 app.get('/', function (req, res) {
-  var high = 500, low = 150
+  let high = 500
+  let low = 150
 
   setTimeout(() => {
     res.send()
