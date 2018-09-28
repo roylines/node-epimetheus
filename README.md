@@ -96,7 +96,7 @@ server.connection({
   port: 3000
 });
 
-epimetheus.instrument(this.server);
+epimetheus.instrument(server);
 
 server.route({
   method: 'GET',
