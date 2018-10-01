@@ -46,6 +46,7 @@ The first argument represents the server of the middleware.
 The second argument is optional, and allows some configuration of epimetheus
 
 - `url` - the url on which to serve metrics. Defaults to `/metrics`.
+- `healthServer` - an optional express server instance to bind the metric-serving route to.
 
 See the following examples of use with [http](#http), [express](#express), [hapi](#hapi) and [restify](#restify).
 
