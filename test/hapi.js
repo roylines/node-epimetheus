@@ -7,31 +7,33 @@ const assertExpectations = require('./assert-expectations')
 
 function setup (options) {
   return describe('hapi ' + options.url, () => {
-    before((done) => {
-      this.server = new Hapi.Server()
-      this.server.connection({
-        port: 3000
-      })
-      epithemeus.instrument(this.server, options)
+    before(async () => {
+      this.server = Hapi.Server({ port: 3000 })
+
+      await epithemeus.instrument(this.server, options)
+
       this.server.route({
         method: 'GET',
         path: '/',
-        handler: (req, resp) => {
-          resp()
+        handler: async (request, h) => {
+          return h.response()
         }
       })
+
       this.server.route({
         method: 'GET',
         path: '/resource/101',
-        handler: (req, resp) => {
-          resp()
+        handler: async (request, h) => {
+          return h.response()
         }
       })
-      this.server.start(done)
+
+      return await this.server.start()
+
     })
 
-    after((done) => {
-      return this.server.stop(done)
+    after(async () => {
+      return await this.server.stop()
     })
 
     assertExpectations(options)

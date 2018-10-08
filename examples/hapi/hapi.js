@@ -1,22 +1,31 @@
 const Hapi = require('hapi')
 const epithemeus = require('epimetheus')
 
-const server = new Hapi.Server()
-
-server.connection({
-  port: 8002
+const server = Hapi.Server({
+    port: 8002
 })
 
-epithemeus.instrument(server)
+async function init() {
+  try {
+    await epithemeus.instrument(server);
 
-server.route({
-  method: 'GET',
-  path: '/',
-  handler: (req, resp) => {
-    resp()
+    server.route({
+      method: 'GET',
+      path: '/',
+      handler: async (request, h) => {
+        return h.response()
+      }
+    })
+
+    await server.start()
+
+    console.log(`hapi ${server.version} server listening on port 8002`)
+
+  } catch(err) {
+    console.log('Error', err);
+    process.exit(1);
   }
-})
 
-server.start(() => {
-  console.log('hapi server listening on port 8002')
-})
+}
+
+init();

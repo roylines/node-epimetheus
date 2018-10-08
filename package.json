@@ -31,12 +31,12 @@
   },
   "devDependencies": {
     "chai": "^4.0.2",
-    "coveralls": "^2.13.1",
+    "coveralls": "^3.0.2",
     "express": "^4.15.3",
     "git-pre-hooks": "^1.2.0",
-    "hapi": "^16.4.3",
-    "istanbul": "^0.4.5",
-    "mocha": "^3.4.2",
+    "hapi": "^17.6.0",
+    "istanbul": "^1.1.0-alpha.1",
+    "mocha": "^5.2.0",
     "request": "^2.81.0",
     "restify": "^5.0.0",
     "sinon": "^2.3.6"

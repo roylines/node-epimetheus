@@ -10,6 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "epimetheus": "*",
-    "hapi": "*"
+    "hapi": "^17.x.x"
   }
 }
