@@ -1,6 +1,6 @@
 {
-  "name": "@r3pi/epimetheus",
-  "version": "1.1.1-hapi17",
+  "name": "@r3pi/node-epimetheus",
+  "version": "1.1.1-hapi17v2",
   "description": "node middleware to automatically instrument node applications for consumption by prometheus",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@bitbucket.r3pi.net:7999/rdpty/epimetheus.git"
+    "url": "ssh://git@bitbucket.r3pi.net:7999/rdpty/node-epimetheus.git"
   },
   "keywords": [
     "prometheus",
