@@ -8,7 +8,7 @@ function instrument (app, options) {
   options = defaults(options)
 
   if (hapi.instrumentable(app)) {
-    hapi.instrument(app, options)
+    return hapi.instrument(app, options)
   } else if (express.instrumentable(app)) {
     express.instrument(app, options)
   } else if (restify.instrumentable(app)) {
