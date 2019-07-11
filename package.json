@@ -34,14 +34,14 @@
     "coveralls": "^3.0.2",
     "express": "^4.15.3",
     "git-pre-hooks": "^1.2.0",
-    "hapi": "^17.6.0",
+    "hapi": "^18.1.0",
     "istanbul": "^1.1.0-alpha.1",
-    "mocha": "^5.2.0",
+    "mocha": "^6.1.4",
     "request": "^2.81.0",
-    "restify": "^5.0.0",
-    "sinon": "^2.3.6"
+    "restify": "^8.3.3",
+    "sinon": "^7.3.2"
   },
   "dependencies": {
-    "prom-client": "^10.0.0"
+    "prom-client": "^11.5.3"
   }
 }
